@@ -66,9 +66,25 @@ int get_idx(vector<int> arr,int k){
 }
 
 
+int countSubsets(vi arr,int n,int i,int x){
+    if(i==n){
+        if(x==0)return 1;
+        return 0;
+    }
+    int inc = countSubsets(arr,n,i+1,x-arr[i]);
+    int exc = countSubsets(arr,n,i+1,x);
+    return inc + exc;
+}
+
 void solve(){ 
-    int x = (log(243) / log(3));
-    cout << x << endl;
+    // Given a set of non-negative integers, and a value sum,
+    // determine if there isa subset of the given set with sum
+    // equal to given sum.
+
+    vi arr = {1,2,3,4,5};
+    int x = 6;
+    cout << countSubsets(arr,arr.size(),0,x);
+
 }
 
 int main() {

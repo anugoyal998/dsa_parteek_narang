@@ -65,10 +65,26 @@ int get_idx(vector<int> arr,int k){
     return -1;
 }
 
+int ladders(int n){
+    if(n==0 || n==1)return 1;
+    if(n==2)return 2;
+    return ladders(n-1) + ladders(n-2) + ladders(n-3);
+}
+
 
 void solve(){ 
-    int x = (log(243) / log(3));
-    cout << x << endl;
+    // Given a ladder
+    // containing N Steps,
+    // you can take a jump of
+    // 1,2 or 3 at each step.
+    // Find the number of
+    // ways to climb the
+    // ladder.       
+
+    int n;
+    cin >> n;
+    cout << ladders(n) << endl;
+
 }
 
 int main() {

@@ -65,10 +65,21 @@ int get_idx(vector<int> arr,int k){
     return -1;
 }
 
+int binary_search(vector<int> arr,int n,int key){
+    int s = 0, e = n-1;
+
+    while(s<=e){
+        int mid = (s + e) >> 1;
+        if(arr[mid] == key)return mid;
+        else if(arr[mid] > key)e = mid-1;
+        else s = mid+1;
+    }
+
+    return -1;
+}
 
 void solve(){ 
-    int x = (log(243) / log(3));
-    cout << x << endl;
+
 }
 
 int main() {

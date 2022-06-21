@@ -65,10 +65,46 @@ int get_idx(vector<int> arr,int k){
     return -1;
 }
 
+int rotated_search(vi a,int key){
+    int n = a.size();
+
+    int s = 0, e = n-1;
+
+    while(s<=e){
+        int mid = (s+e)/2;
+        if(a[mid] == key)return mid;
+
+        if(a[s] <= a[mid]){
+            // left
+            if(key >= a[s] and  key <= a[mid]){
+                e = mid-1;
+            }else{
+                s = mid+1;
+            }
+        }else{
+            // right
+            if(key >= a[mid] and key <= a[e]){
+                s = mid+1;
+            }else{
+                e = mid-1;
+            }
+        }
+    }
+
+    return -1;
+}
 
 void solve(){ 
-    int x = (log(243) / log(3));
-    cout << x << endl;
+
+    // Write a function that takes input an sorted array of
+    // distinct integers, which is rotated about a pivot point and
+    // finds the index of any given element.
+
+    vi a = {4,5,6,7,0,1,2,3};
+    int key;
+    cin >> key;
+    cout << rotated_search(a,key) << endl;
+        
 }
 
 int main() {

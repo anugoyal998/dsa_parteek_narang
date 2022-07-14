@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define loop(i,st,ed) for(int i=st;i<ed;i++)
+#define vi vector<int>
+#define vvi vector<vi>
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -64,6 +67,14 @@ template <class T> void __print(set <T> v) {cout << "[ "; for (T i : v) {__print
 template <class T> void __print(multiset <T> v) {cout << "[ "; for (T i : v) {__print(i); cout << " ";} cout << "]";}
 template <class T, class V> void __print(map <T, V> v) {cout << "[ "; for (auto i : v) {__print(i); cout << " ";} cout << "]";}
 
+class MyGraph{
+    public:
+    int m,n;
+    vvi arr;
+    MyGraph(int n,int m,vvi arr){
+        this->m=m;this->n=n;this->arr = arr;
+    }
+};
 
 long long int fast_pow(int x,int y,long long int m/* modulo*/ = 1000000007){
     long long int res = 1;
@@ -96,15 +107,61 @@ int lcm(int a,int b){
     return (a * b) / gcd(a,b);
 }
 
+MyGraph input_graph(){
+    int n,m;
+    cin >> n >> m;
+    vvi arr(n+1);
+    loop(i,0,m){
+        int u,v;
+        cin >> u >> v;
+        arr[u].pb(v);
+        arr[v].pb(u);
+    }
+    return MyGraph(n,m,arr);
+}
+
+int maxDis(vvi arr,int n,int src,bool flag=true){
+    vector<int> dist(n+1,INT_MAX);
+    queue<int> q;
+    q.push(src);
+    dist[src] = 0;
+    while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        for(auto i:arr[node]){
+            if(dist[node]+1 < dist[i]){
+                dist[i] = dist[node] + 1;
+                q.push(i);
+            }
+        }
+    }
+    int ans = dist[1];
+    int node = 1;
+    for(int i = 2; i <= n;i++){
+        if(dist[i] > ans){
+            ans = dist[i];
+            node = i;
+        }
+    }
+    return flag ? node : ans;
+}
 
 void solve(){
-    vector<string> ans = {"skdfsdf"};
-    _debug(ans);
+    // find diameter of tree ( Tree need not be Binary)
+    // Algorithm
+    // choose any node as root node and find node with maximum distance
+    // from root
+    // max distance from that node = diameter of tree
+    MyGraph g = input_graph();
+    int n = g.n, m = g.m;
+    vvi arr = g.arr;
+    int node = maxDis(arr,n,1);
+    cout << maxDis(arr,n,node,false) << endl;
 }
 
 int main() {
 #ifndef ONLINE_JUDGE
-	freopen("Error.txt", "w", stderr);
+freopen("Error.txt", "w", stderr);
 #endif
     solve();
 }

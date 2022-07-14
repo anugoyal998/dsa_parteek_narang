@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define loop(i,st,ed) for(int i=st;i<ed;i++)
+#define vi vector<int>
+#define vvi vector<vi>
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -64,6 +67,14 @@ template <class T> void __print(set <T> v) {cout << "[ "; for (T i : v) {__print
 template <class T> void __print(multiset <T> v) {cout << "[ "; for (T i : v) {__print(i); cout << " ";} cout << "]";}
 template <class T, class V> void __print(map <T, V> v) {cout << "[ "; for (auto i : v) {__print(i); cout << " ";} cout << "]";}
 
+class MyGraph{
+    public:
+    int m,n;
+    vvi arr;
+    MyGraph(int n,int m,vvi arr){
+        this->m=m;this->n=n;this->arr = arr;
+    }
+};
 
 long long int fast_pow(int x,int y,long long int m/* modulo*/ = 1000000007){
     long long int res = 1;
@@ -96,15 +107,89 @@ int lcm(int a,int b){
     return (a * b) / gcd(a,b);
 }
 
+MyGraph input_graph(){
+    int n,m;
+    cin >> n >> m;
+    vvi arr(n+1);
+    loop(i,0,m){
+        int u,v;
+        cin >> u >> v;
+        arr[u].pb(v);
+        arr[v].pb(u);
+    }
+    return MyGraph(n,m,arr);
+}
+
+void dfs(int node,int lvl,int par,vvi arr,vi &level,vvi &lca){
+    level[node] = lvl;
+    lca[node][0] = par;
+
+    for(int child : arr[node]){
+        if(child != par){
+            dfs(child,lvl+1,node,arr,level,lca);
+        }
+    }
+}
+
+void init(vvi arr,int n,vvi &lca,vi &level,int maxN){
+    dfs(1,0,-1,arr,level,lca);
+    for(int i=1;i<=maxN;i++){
+        for(int j=1;j<=n;j++){
+            if(lca[j][i-1] != -1){
+                int par = lca[j][i-1];
+                lca[j][i] = lca[par][i-1]; // dp
+            }
+        }
+    }
+}
+
+int getLCA(int a,int b,vi level,vvi lca,int maxN){
+    if(level[b] < level[a])
+        swap(a,b);
+    int d = level[b] - level[a];
+
+    while(d>0){
+        int i = log2(d);
+        b = lca[b][i];
+        d -= 1 << i;
+    }
+
+    if(a == b)return a;
+
+    for(int i=maxN;i>=0;i--){
+        if(lca[a][i] != -1 and lca[a][i] != lca[b][i]){
+            a = lca[a][i], b = lca[b][i];
+        }
+    }
+    return lca[a][0];
+}
+
+int getDist(int a,int b,vi level,vvi lca,int maxN) {
+    int __lca = getLCA(a,b,level,lca,maxN);
+    return level[a] + level[b] - 2 * level[__lca];
+}
 
 void solve(){
-    vector<string> ans = {"skdfsdf"};
-    _debug(ans);
+    MyGraph g = input_graph();
+    int n = g.n, m = g.m;
+    vvi arr = g.arr;
+    int maxN = ceil(log2(n));
+    vi level(n+1);
+    vvi lca(n+1,vi(maxN+1,-1));
+    init(arr,n,lca,level,maxN);
+    
+    int q;
+    cin >> q;
+    while (q--){
+        int a,b;
+        cin >> a >> b;
+        cout << getDist(a,b,level,lca,maxN) << endl;
+    }
 }
 
 int main() {
 #ifndef ONLINE_JUDGE
-	freopen("Error.txt", "w", stderr);
+freopen("Error.txt", "w", stderr);
 #endif
     solve();
 }

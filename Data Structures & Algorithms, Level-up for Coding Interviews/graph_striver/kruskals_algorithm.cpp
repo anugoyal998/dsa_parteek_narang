@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define loop(i,st,ed) for(int i=st;i<ed;i++)
+#define vi vector<int>
+#define vvi vector<vi>
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -64,6 +67,14 @@ template <class T> void __print(set <T> v) {cout << "[ "; for (T i : v) {__print
 template <class T> void __print(multiset <T> v) {cout << "[ "; for (T i : v) {__print(i); cout << " ";} cout << "]";}
 template <class T, class V> void __print(map <T, V> v) {cout << "[ "; for (auto i : v) {__print(i); cout << " ";} cout << "]";}
 
+class MyGraph{
+    public:
+    int m,n;
+    vvi arr;
+    MyGraph(int n,int m,vvi arr){
+        this->m=m;this->n=n;this->arr = arr;
+    }
+};
 
 long long int fast_pow(int x,int y,long long int m/* modulo*/ = 1000000007){
     long long int res = 1;
@@ -96,15 +107,84 @@ int lcm(int a,int b){
     return (a * b) / gcd(a,b);
 }
 
+MyGraph input_graph(){
+    int n,m;
+    cin >> n >> m;
+    vvi arr(n+1);
+    loop(i,0,m){
+        int u,v;
+        cin >> u >> v;
+        arr[u].pb(v);
+        arr[v].pb(u);
+    }
+    return MyGraph(n,m,arr);
+}
+
+class node{
+    public:
+    int u,v,wt;
+    node(int u,int v,int wt){
+        this->u = u;
+        this->v = v;
+        this->wt = wt;
+    }
+};
+
+bool comp(node a, node b){
+    return a.wt < b.wt;
+}
+
+int findPar(int node, vi &parent){
+    if(node == parent[node])return node;
+    return parent[node] = findPar(parent[node],parent);
+}
+
+void Union(int u,int v, vi &parent, vi &rank){
+    u = findPar(u,parent);
+    v = findPar(v,parent);
+    if(u == v)return;
+    if(rank[u] < rank[v]){
+        parent[u] = v;
+    }else if(rank[u] > rank[v]){
+        parent[v] = u;
+    }else{
+        parent[v] = u;
+        rank[u]++;
+    }
+}
 
 void solve(){
-    vector<string> ans = {"skdfsdf"};
-    _debug(ans);
+    int n,m;
+    cin >> n >> m;  
+    vector<node> edges;
+    loop(i,0,m){
+        int u,v,wt;
+        cin >> u >> v >> wt;
+        edges.push_back(node(u,v,wt));
+    }
+    sort(edges.begin(), edges.end(),comp);
+
+    vector<int> parent(n);
+    loop(i,0,n)parent[i] = i;
+    vi rank(n,0);
+
+    int cost = 0;
+    vector<pair<int,int>> mst;  
+    for(auto it:edges){
+        if(findPar(it.v,parent) != findPar(it.u,parent)){
+            cost += it.wt;
+            mst.push_back({it.u,it.v});
+            Union(it.u,it.v,parent,rank);
+        }
+    }
+
+    cout << cost << endl;
+    _debug(mst);
 }
 
 int main() {
 #ifndef ONLINE_JUDGE
-	freopen("Error.txt", "w", stderr);
+freopen("Error.txt", "w", stderr);
 #endif
     solve();
 }

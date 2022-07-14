@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define loop(i,st,ed) for(int i=st;i<ed;i++)
+#define vi vector<int>
+#define vvi vector<vi>
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -64,6 +67,14 @@ template <class T> void __print(set <T> v) {cout << "[ "; for (T i : v) {__print
 template <class T> void __print(multiset <T> v) {cout << "[ "; for (T i : v) {__print(i); cout << " ";} cout << "]";}
 template <class T, class V> void __print(map <T, V> v) {cout << "[ "; for (auto i : v) {__print(i); cout << " ";} cout << "]";}
 
+class MyGraph{
+    public:
+    int m,n;
+    vvi arr;
+    MyGraph(int n,int m,vvi arr){
+        this->m=m;this->n=n;this->arr = arr;
+    }
+};
 
 long long int fast_pow(int x,int y,long long int m/* modulo*/ = 1000000007){
     long long int res = 1;
@@ -96,15 +107,65 @@ int lcm(int a,int b){
     return (a * b) / gcd(a,b);
 }
 
+MyGraph input_graph(){
+    int n,m;
+    cin >> n >> m;
+    vvi arr(n+1);
+    loop(i,0,m){
+        int u,v;
+        cin >> u >> v;
+        arr[u].pb(v);
+        arr[v].pb(u);
+    }
+    return MyGraph(n,m,arr);
+}
+
+vi parent(100);
+vi Rank(100);
+
+void makeset(){
+    loop(i,1,101){
+        parent[i] = i;
+        Rank[i] = 0;
+    }
+}
+
+int findPar(int node){
+    if(node == parent[node])return node;
+    return parent[node] = findPar(parent[node]);
+}
+
+void _union(int u,int v){
+    u = findPar(u);
+    v = findPar(v);
+    if(u == v)return;
+    if(Rank[u] < Rank[v]){
+        parent[u] = v;
+    }else if(Rank[u] > Rank[v]){
+        parent[v] = u;
+    }else{
+        parent[v] = u;
+        Rank[u]++;
+    }
+}
 
 void solve(){
-    vector<string> ans = {"skdfsdf"};
-    _debug(ans);
+    makeset();
+    int m;
+    cin >> m;
+    while(m--){
+        int u,v;
+        cin >> u >> v;
+        _union(u,v);;
+    }
+    if(findPar(2) != findPar(3)){
+        cout << "Different Component" << endl;
+    }else cout << "Same Component" << endl;
 }
 
 int main() {
 #ifndef ONLINE_JUDGE
-	freopen("Error.txt", "w", stderr);
+freopen("Error.txt", "w", stderr);
 #endif
     solve();
 }

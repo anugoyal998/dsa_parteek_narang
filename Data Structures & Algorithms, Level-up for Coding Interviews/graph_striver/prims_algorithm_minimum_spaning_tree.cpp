@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define loop(i,st,ed) for(int i=st;i<ed;i++)
+#define vi vector<int>
+#define vvi vector<vi>
 #define MOD 1000000007
 #define MOD1 998244353
 #define INF 1e18
@@ -64,6 +67,14 @@ template <class T> void __print(set <T> v) {cout << "[ "; for (T i : v) {__print
 template <class T> void __print(multiset <T> v) {cout << "[ "; for (T i : v) {__print(i); cout << " ";} cout << "]";}
 template <class T, class V> void __print(map <T, V> v) {cout << "[ "; for (auto i : v) {__print(i); cout << " ";} cout << "]";}
 
+class MyGraph{
+    public:
+    int m,n;
+    vvi arr;
+    MyGraph(int n,int m,vvi arr){
+        this->m=m;this->n=n;this->arr = arr;
+    }
+};
 
 long long int fast_pow(int x,int y,long long int m/* modulo*/ = 1000000007){
     long long int res = 1;
@@ -96,15 +107,61 @@ int lcm(int a,int b){
     return (a * b) / gcd(a,b);
 }
 
+MyGraph input_graph(){
+    int n,m;
+    cin >> n >> m;
+    vvi arr(n+1);
+    loop(i,0,m){
+        int u,v;
+        cin >> u >> v;
+        arr[u].pb(v);
+        arr[v].pb(u);
+    }
+    return MyGraph(n,m,arr);
+}
 
 void solve(){
-    vector<string> ans = {"skdfsdf"};
-    _debug(ans);
+    int n,m;
+    cin >> n >> m;
+    vector<pair<int,int>> arr[n];
+
+    loop(i,0,m){
+        int a,b,wt;
+        cin >> a >> b >> wt;
+        arr[a].push_back({b,wt});
+        arr[b].push_back({a,wt});
+    }
+
+    int parent[n];
+    int key[n];
+    bool mst[n];
+    for(int i=0;i<n;i++){
+        key[i] = INT_MAX, mst[i] = false,parent[i] = -1;
+    }
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+
+
+    key[0] = 0;
+    parent[0] = -1;
+    pq.push({0,0});
+    for(int count = 0; count < n;count++){
+        int u = pq.top().second;
+        pq.pop();
+        mst[u] = true;
+
+        for(auto it:arr[u]){
+            int v = it.first;
+            int weight = it.second;
+            if(mst[v] == false and weight < key[v])
+                parent[v] = u, key[v] = weight;
+        }
+    }
+    for(int i=0;i<n;i++)cout << parent[i] <<  " ";
 }
 
 int main() {
 #ifndef ONLINE_JUDGE
-	freopen("Error.txt", "w", stderr);
+freopen("Error.txt", "w", stderr);
 #endif
     solve();
 }

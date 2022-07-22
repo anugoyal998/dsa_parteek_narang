@@ -1,0 +1,9 @@
+19 https://www.codingninjas.com/codestudio/problems/0-1-knapsack_920542
+20 https://www.codingninjas.com/codestudio/problems/minimum-elements_3843091
+*26 https://www.codingninjas.com/codestudio/problems/longest-common-subsequence_624879
+27 https://www.codingninjas.com/codestudio/problems/longest-common-substring_1235207
+28 https://leetcode.com/problems/longest-palindromic-substring/
+29 https://www.codingninjas.com/codestudio/problems/minimum-insertions-to-make-palindrome_985293    
+30 https://www.codingninjas.com/codestudio/problems/can-you-make_42445
+32 https://www.codingninjas.com/codestudio/problems/subsequence-counting_3755256
+48 https://www.codingninjas.com/codestudio/problems/matrix-chain-multiplication_975344?source=youtube&campaign=striver_dp_videos&utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_dp_videos

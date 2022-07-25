@@ -1,71 +1,59 @@
 // https://www.codingninjas.com/codestudio/problems/implement-trie_631356?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_tries_videos
 
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 using namespace std;
 
-/*
-    Your Trie object will be instantiated and called as such:
-    Trie* obj = new Trie();
-    obj->insert(word);
-    bool check2 = obj->search(word);
-    bool check3 = obj->startsWith(prefix);
- */
-
-struct Node
-{
-    Node* links[26];
+struct Node {
+    unordered_map<char,Node*> mp;
     bool flag = false;
-
-    bool containsKey(char ch){
-        return links[ch-'a'] != NULL;
+    //checks if the reference trie is present or not
+    bool containKey(char ch) {
+        return (mp[ch] != NULL);
     }
-
-    void put(char ch,Node* node){
-        links[ch-'a'] = node;
+    //creating reference trie
+    void put(char ch, Node *node) {
+        mp[ch] = node; 
     }
-
-    Node* get(char ch){
-        return links[ch-'a'];
+    //to get the next node for traversal
+    Node *get(char ch) {
+        return mp[ch];
     }
-
-    void setEnd(){
+    //setting flag to true at the end of the word
+    void setEnd() {
         flag = true;
     }
-
-    bool isEnd(){
+    //checking if the word is completed or not
+    bool isEnd() {
         return flag;
     }
 };
 
-
 class Trie {
-private: Node* root;
+private:
+    Node* root;
 public:
-
-    /** Initialize your data structure here. */
     Trie() {
+        //creating new obejct
         root = new Node();
     }
 
-    /** Inserts a word into the trie. */
-    /* TC: O(N) */
     void insert(string word) {
-        Node* node = root;
-        for(int i=0;i<word.length();i++){
-            if(!node->containsKey(word[i])){
+        //initializing dummy node pointing to root initially
+        Node *node = root;
+        for (int i = 0; i < word.size(); i++) {
+            if (!node->containKey(word[i])) {
                 node->put(word[i], new Node());
             }
-            node->get(word[i]);
+            //moves to reference trie
+            node = node->get(word[i]);
         }
         node->setEnd();
     }
 
-    /** Returns if the word is in the trie. */
-    /* TC: O(N) */
     bool search(string word) {
-        Node* node = root;
-        for(int i = 0; i < word.length(); i++){
-            if(!node->containsKey(word[i])){
+        Node *node = root;
+        for (int i = 0; i < word.size(); i++) {
+            if (!node->containKey(word[i])) {
                 return false;
             }
             node = node->get(word[i]);
@@ -73,12 +61,10 @@ public:
         return node->isEnd();
     }
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
-    /* TC: O(N) */
     bool startsWith(string prefix) {
         Node* node = root;
-        for(int i = 0; i < prefix.length();i++){
-            if(!node->containsKey(prefix[i])){
+        for (int i = 0; i < prefix.size(); i++) {
+            if (!node->containKey(prefix[i])) {
                 return false;
             }
             node = node->get(prefix[i]);

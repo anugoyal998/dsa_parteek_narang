@@ -4,6 +4,16 @@ using namespace std;
 #define vi vector<ll>
 #define vvi vector<vi>
 
+ll f(ll i,ll value_left,vvi arr,vvi &dp){
+    if(value_left == 0) return 0;
+    if(i<0)return 1e15;
+    if(dp[i][value_left] != -1)return dp[i][value_left];
+    ll ans = f(i-1,value_left,arr,dp);
+    if(value_left - arr[i][1] >= 0)
+        ans = min(ans,f(i-1,value_left-arr[i][1],arr,dp) + arr[i][0]);
+    return dp[i][value_left] = ans;
+}
+
 int main(){
     ll n,w;
     cin >> n >> w;
@@ -17,28 +27,13 @@ int main(){
         sum += val;
     }
 
+    vvi dp(n,vi(sum+1,-1));
 
-    vi prev(sum+1,w), cur(sum+1,w);
-    prev[arr[0][1]] = w - arr[0][0];
-
-    for(ll i=1;i<n;i++){
-        cur[0] = w;
-        for(ll j=1;j<=sum;j++){
-            int notTake = prev[j];
-            int take = w;
-            if(j >= arr[i][1] and prev[j-arr[i][1]] >= arr[i][0]){
-                take = prev[j-arr[i][1]] - arr[i][0];
-            }
-            cur[j] = min(take,notTake);
+    for(ll i = sum;i>=0;i--){
+        if(f(n-1,i,arr,dp) <= w){
+            cout << i << endl;
+            break;
         }
     }
-
-    int ans = 0;
-    for(int i=0;i<=sum;i++){
-        if(prev[i] != w)ans = i;
-    }
-
-    cout << ans << endl;
-
     return 0;
 }

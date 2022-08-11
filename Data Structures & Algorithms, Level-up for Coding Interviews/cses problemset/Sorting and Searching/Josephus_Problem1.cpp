@@ -11,7 +11,17 @@ int main(){
     freopen("output.txt", "w", stdout);
     #else
     #endif
+    indexed_set s;
+    int n,k; cin>>n>>k;
+    for (int i = 1; i <= n; i++)
+        s.insert(i);
 
-    
+    int ind = k%n;
+    while(n--) {
+        auto y = s.find_by_order(ind);
+        cout<<*y<<' ';
+        s.erase(y);
+        if (n) ind = (ind%n + k)%n;
+    } 
     return 0;
 }

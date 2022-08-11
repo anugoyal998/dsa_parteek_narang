@@ -12,6 +12,5 @@ int main(){
     #else
     #endif
 
-    
     return 0;
 }

@@ -1,0 +1,3 @@
+abcabca
+a b c a b c a
+0 0 0 4 0 0 1

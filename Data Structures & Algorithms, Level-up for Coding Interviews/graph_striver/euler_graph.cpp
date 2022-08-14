@@ -66,6 +66,14 @@ void findEuler_Path_Cycle()
 
 int main()
 {
+	// undirected
+		// Eulerian circuit --> every node has even degree
+		// Eulerian path --> (n-2) nodes have even degree and 2 nodes have odd degree
+	// directed 
+		// Eulerian circuit --> indegree = outdegree
+		// Eulerian path --> (n-2) nodes have indegree == outdegree
+							// and indegree = outdegree + 1
+							// outdegree = indegree + 1
 	adj[0].pb(1);
 	adj[1].pb(0);
 	adj[0].pb(2);

@@ -63,6 +63,7 @@ int lca(int a,int b){
 
 int main(){
     freopen("input.txt","r",stdin);
+    freopen("output.txt","w",stdout);
     int n;
     cin >> n;
     arr.resize(n+1);

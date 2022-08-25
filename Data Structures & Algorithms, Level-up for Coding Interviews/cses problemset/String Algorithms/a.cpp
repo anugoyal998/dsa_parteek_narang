@@ -5,8 +5,8 @@ using namespace std;
 #define ll long long
 #define mod 1000000007
 
-void print(vector<int> v){
-    for(auto i:v)cout << i << " ";
+void print(vector<string> v){
+    for(auto s:v)cout << s << " ";
     cout << endl;
 }
 
@@ -16,41 +16,43 @@ int main(){
     freopen("output.txt", "w", stdout);
     #else
     #endif
-
-
     string s;
     cin >> s;
-    int k;
-    cin >> k;
-    vector<string> arr(k);
-    for(int i=0; i<k; i++){
-        cin >> arr[i];
-    }
-    int n = s.length();
-
-    vector<int> hash(n);
-    int d = 26;
-    for(int i=0; i<n; i++){
-        int num = s[i]-'a' + 1;
-        if(i == 0){
-            hash[i] = num;
+    vector<string> v;
+    string x = "";
+    int size = 0;
+    int n  = s.length();
+    for(int i=0;i<n;i++){
+        if(x == ""){
+            x += s[i];size++;
         }else{
-            hash[i] = (d * hash[i-1] + num) % mod;
+            if(x[size-1] > s[i]){
+                v.push_back(x);
+                x = "";x += s[i];
+                size = 1;
+            }else{
+                x += s[i];
+                size++;
+            }
+        }
+    }
+    if(x != "")v.push_back(x);
+    string mine = *min_element(v.begin(),v.end());
+    int index = -1;
+    for(int i=0;i<v.size();i++){
+        if(v[i] == mine){
+            index = i;break;
         }
     }
 
-    print(hash);
-
-    for(auto str:arr){
-        int hash_val = 0;
-        for(auto ch:str){
-            int num = ch - 'a' + 1;
-            hash_val = (hash_val * d + num) % mod;
-        }
-        cout << hash_val << endl;
+    string ans = "";
+    for(int i=index;i<v.size();i++){
+        ans += v[i];
     }
-
-
-
+    for(int i=0;i<index;i++){
+        ans += v[i];
+    }
+    print(v);   
+    cout << ans << endl;
     return 0;
 }

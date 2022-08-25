@@ -11,8 +11,23 @@ int main(){
     freopen("output.txt", "w", stdout);
     #else
     #endif
+
     string s;
     cin >> s;
+
+    int n = s.length();
+    s += s;
+
+    string x = s.substr(0,n);
+    string ans = x;
+    for(int i=n;i<2*n;i++){
+        x.erase(x.begin());
+        x += s[i];
+        ans = min(ans,x);
+    }
+
+    cout << ans << endl;
+
 
     return 0;
 }

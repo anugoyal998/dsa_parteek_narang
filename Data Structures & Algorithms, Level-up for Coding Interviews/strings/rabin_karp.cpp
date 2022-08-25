@@ -1,87 +1,40 @@
-/* Following program is a C++ implementation of Rabin Karp
-Algorithm given in the CLRS book */
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
+#define ll long long
 
-// d is the number of characters in the input alphabet
-#define d 256
+int p = 31;
+const int N = 1e5+7, m = 1e9+7;
+vector<ll> powers(N);
 
-/* pat -> pattern
-	txt -> text
-	q -> A prime number
-*/
-void search(char pat[], char txt[], int q)
-{
-	int M = strlen(pat);
-	int N = strlen(txt);
-	int i, j;
-	int p = 0; // hash value for pattern
-	int t = 0; // hash value for txt
-	int h = 1;
+int main(){
+	// https://practice.geeksforgeeks.org/problems/31272eef104840f7430ad9fd1d43b434a4b9596b/1
+	// find occurrences of s in t
+	string s,t;
+	cin >> s >> t;
+	int T = t.length(), S = s.length();
 
-	// The value of h would be "pow(d, M-1)%q"
-	for (i = 0; i < M - 1; i++)
-		h = (h * d) % q;
-
-	// Calculate the hash value of pattern and first
-	// window of text
-	for (i = 0; i < M; i++)
-	{
-		p = (d * p + pat[i]) % q;
-		t = (d * t + txt[i]) % q;
+	powers[0] = 1;
+	for(int i=1;i<N;i++){
+		powers[i] = (powers[i-1] * p) % m;
 	}
 
-	// Slide the pattern over text one by one
-	for (i = 0; i <= N - M; i++)
-	{
+	vector<ll> h(T+1,0);
+	for(int i=0;i<T;i++){
+		h[i+1] = (h[i] + (t[i] - 'a' + 1) * powers[i]) % m;
+	}
 
-		// Check the hash values of current window of text
-		// and pattern. If the hash values match then only
-		// check for characters one by one
-		if ( p == t )
-		{
-			/* Check for characters one by one */
-			for (j = 0; j < M; j++)
-			{
-				if (txt[i+j] != pat[j])
-				{
-				break;
-				}
-					
-					
-			}
+	ll h_s = 0;
+	for(int i=0;i<S;i++){
+		h_s = (h_s + (s[i] - 'a' + 1) * powers[i]) % m;
+	}
 
-			// if p == t and pat[0...M-1] = txt[i, i+1, ...i+M-1]
-			
-			if (j == M)
-				cout<<"Pattern found at index "<< i<<endl;
-		}
-
-		// Calculate hash value for next window of text: Remove
-		// leading digit, add trailing digit
-		if ( i < N-M )
-		{
-			t = (d*(t - txt[i]*h) + txt[i+M])%q;
-
-			// We might get negative value of t, converting it
-			// to positive
-			if (t < 0)
-			t = (t + q);
+	for(int i=0;i + S - 1 < T;i++){
+		ll cur_h = (h[i+S] - h[i] + m) % m;
+		if(cur_h == (h_s * powers[i]) % m){
+			cout << i << " ";
 		}
 	}
-}
 
-int main()
-{
-    // Worst Case TC --> O(nm)
-    // Best and Avg TC --> O(n+m)
-	char txt[] = "GEEKS FOR GEEKS";
-	char pat[] = "GEEK";
-		
-	//we mod to avoid overflowing of value but we should take as big q as possible to avoid the collison
-	int q =INT_MAX;
-	
-	// Function Call
-	search(pat, txt, q);
+
 	return 0;
 }

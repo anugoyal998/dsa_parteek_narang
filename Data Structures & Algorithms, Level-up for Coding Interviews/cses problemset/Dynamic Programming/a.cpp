@@ -5,7 +5,16 @@ using namespace std;
 #define ll long long
 #define mod 1000000007
 
-int m;
+int f(int i,int j,vector<int> arr,vector<vector<int>> &dp){
+    if(i>j)return 0;
+    if(dp[i][j] != -1)return dp[i][j];
+    
+    
+    int left = arr[i] + min(f(i+2,j,arr,dp),f(i+1,j-1,arr,dp));
+    int right = arr[j] + min(f(i,j-2,arr,dp),f(i+1,j-1,arr,dp));
+    
+    return dp[i][j] = max(left,right);
+}
 
 int main(){
     #ifndef ONLINE_JUDGE
@@ -15,32 +24,11 @@ int main(){
     #endif
 
     int n;
-    cin >> n >> m;
+    cin >> n;
     vector<int> arr(n);
-    for(int i=0;i<n;i++)cin >> arr[i];
-    vector<vector<ll>> dp(n,vector<ll>(m+3,0));
-
-    for(int i=0;i<n;i++){
-        for(int j=1;j<=m;j++){
-            if(i == 0){
-                if(arr[i] == 0 or arr[i] == j)
-                    dp[i][j]  = 1;
-                else
-                    dp[i][j] = 0;
-            }else{
-                if(arr[i] == 0 or arr[i] == j)
-                    dp[i][j] = (dp[i-1][j-1] + dp[i-1][j] + dp[i-1][j+1])%mod;
-                else
-                    dp[i][j] = 0;
-            }
-        }
-    }
-
-    ll ans = 0;
-    for(int i=1;i<=m;i++)
-        ans = (ans + dp[n-1][i])%mod;
-    
-    cout << ans << endl;
+    for(int i=0; i<n;i++)cin >> arr[i];
+    vector<vector<int>> dp(n,vector<int>(n,-1));
+    cout << f(0,n-1,arr,dp) << endl;
 
     return 0;
 }

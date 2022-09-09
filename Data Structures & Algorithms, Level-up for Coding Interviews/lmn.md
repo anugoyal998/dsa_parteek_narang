@@ -737,6 +737,10 @@ int main(){
 ⚠ https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/
 ✅ https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
 ✅ https://leetcode.com/problems/maximum-sum-circular-subarray/
+❌ https://www.geeksforgeeks.org/rearrange-positive-and-negative-numbers/
+✅ https://practice.geeksforgeeks.org/problems/factorials-of-large-numbers2508/1
+✅ https://leetcode.com/problems/maximum-product-subarray/
+❌ https://practice.geeksforgeeks.org/problems/minimum-swaps-required-to-bring-all-elements-less-than-or-equal-to-k-together4847/1
 
 ### LinkedList
 `Striver Sheet`
@@ -761,6 +765,9 @@ int main(){
 ### Greedy
 `Striver Sheet`
 ✅ https://practice.geeksforgeeks.org/problems/minimum-platforms-1587115620/1#
+
+`Love Babbar Sheet`
+✅ https://practice.geeksforgeeks.org/problems/minimize-the-heights3351/1
 
 ### Recursion Backtracking
 `Striver Sheet`
@@ -828,6 +835,10 @@ int main(){
 ❌ https://leetcode.com/problems/cheapest-flights-within-k-stops/
 ✅ https://leetcode.com/problems/flower-planting-with-no-adjacent/
 ✅ https://practice.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1
+
+`Leetcode`
+✅ https://practice.geeksforgeeks.org/problems/number-of-distinct-islands/1
+✅ https://practice.geeksforgeeks.org/problems/eventual-safe-states/1
 
 
 ### Trie

@@ -5,15 +5,11 @@ using namespace std;
 #define ll long long
 #define mod 1000000007
 
-int f(int i,int j,vector<int> arr,vector<vector<int>> &dp){
-    if(i>j)return 0;
-    if(dp[i][j] != -1)return dp[i][j];
-    
-    
-    int left = arr[i] + min(f(i+2,j,arr,dp),f(i+1,j-1,arr,dp));
-    int right = arr[j] + min(f(i,j-2,arr,dp),f(i+1,j-1,arr,dp));
-    
-    return dp[i][j] = max(left,right);
+void print(vector<vector<ll>> v){
+    for(auto i:v){
+        for(auto j:i)cout << j <<  " ";
+        cout << endl;
+    }
 }
 
 int main(){
@@ -26,9 +22,32 @@ int main(){
     int n;
     cin >> n;
     vector<int> arr(n);
-    for(int i=0; i<n;i++)cin >> arr[i];
-    vector<vector<int>> dp(n,vector<int>(n,-1));
-    cout << f(0,n-1,arr,dp) << endl;
+    for(int i=0; i<n; i++)arr[i] = i+1;
+    ll sum = (n*(n+1)) / 2;
+    if(sum&1){
+        cout << 0 << endl;
+    }else{
+        sum /= 2;
+        // vector<vector<ll>> dp(n+1,vector<ll>(sum+1,0));
+        // dp[1][0] = dp[1][1] = 1;
+        vector<ll> prev(sum+1,0);
+        prev[0] = prev[1] = 1;
+        for(int i=2;i<=n;i++){
+            vector<ll> cur(sum+1,0);
+            cur[0] = 1;
+            // dp[i][0] = 1;
+            for(int j=1;j<=sum;j++){
+                cur[j] = prev[j];
+                // dp[i][j] = dp[i-1][j];
+                if(j >= i){
+                    cur[j] = (cur[j] + prev[j-i]) % mod;
+                    // dp[i][j] = (dp[i][j] + dp[i-1][j-i]) % mod;
+                }
+            }
+            prev = cur;
+        }
+        cout << (prev[sum] / 2) << endl;
+    }
 
     return 0;
 }

@@ -10,6 +10,12 @@
 - [x] [`Majority Element 2 (Medium)`](https://leetcode.com/problems/majority-element-ii/)
 - [x] [**Reverse Pais (Hard)**](https://leetcode.com/problems/reverse-pairs/)
 - [x] [`Subarray with given XOR`](https://www.interviewbit.com/problems/subarray-with-given-xor/)
+- [x] [**First Missing Positive (Hard)**](https://leetcode.com/problems/first-missing-positive/)
+- [x] [`Spiral Matrix (Medium)`](https://leetcode.com/problems/spiral-matrix/)
+- [x] [`Gas Station (Greedy) (Medium)`](https://leetcode.com/problems/gas-station/)
+- [x] [`Shortest Unsorted Continuous Subarray (Medium)`](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/)
+- [x] [`Maximum Sum Circular Subarray (Kadannes Algorithm) (Medium)`](https://leetcode.com/problems/maximum-sum-circular-subarray/)
+- [x] [**Minimum Possible Integer After at Most K Adjacent Swaps On Digits (Hard)**](https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/)
 
 ### String
 - [x] [Repeated String Match](https://leetcode.com/problems/repeated-string-match/)
@@ -51,6 +57,7 @@
 - [x] [`Search in Sorted Rotated Array (Medium)`](https://leetcode.com/problems/search-in-rotated-sorted-array/)
 - [x] [**Median of 2 Sorted Arrays (Hard)**](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 - [x] [**K-th element of two sorted arrays (Hard)**](https://practice.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array1317/1)
+- [x] [`Find Peak Element (Medium)`](https://leetcode.com/problems/find-peak-element/)
 
 ### Heap
 - [ ] [Implement Heap](https://www.codingninjas.com/codestudio/problems/min-heap_4691801?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=2)
@@ -82,6 +89,7 @@
 ### Dynamic Programming
 - [x] [Edit Distance](https://leetcode.com/problems/edit-distance/)
 - [x] [Longest Palindromic Substring](https://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string/0)
+- [ ] [**Max Sum of Rectangle No Larger Than K (Hard)**](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/)
 
 ### Graph
 - [x] [**Word Ladder (Hard GFG)**](https://practice.geeksforgeeks.org/problems/word-ladder-ii/1)

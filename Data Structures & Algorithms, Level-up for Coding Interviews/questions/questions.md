@@ -28,7 +28,7 @@
 - [x] [Linked List Cycle II (Easy)](https://leetcode.com/problems/linked-list-cycle-ii/)
 - [ ] [**Reverse Nodes in k-Group (Hard)**](https://leetcode.com/problems/reverse-nodes-in-k-group/)
 - [x] [`Copy List With Random Pointers`](https://leetcode.com/problems/copy-list-with-random-pointer/)
-- [ ] [`LRU Cache (Medium)`](https://leetcode.com/problems/lru-cache/)
+- [ ] [**LRU Cache (Hard)**](https://leetcode.com/problems/lru-cache/)
 - [ ] [**LFU Cache (Hard)**](https://leetcode.com/problems/lfu-cache/)
 
 ### Stack and Queue
@@ -39,6 +39,7 @@
 - [x] [Implement Min Stack](https://leetcode.com/problems/min-stack/)
 - [x] [**Maximum of minimum for every window size (Hard)**](https://www.codingninjas.com/codestudio/problems/max-of-min_982935?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website)
 - [x] [**The Celebrity Problem (Hard)**](https://www.codingninjas.com/codestudio/problems/the-celebrity-problem_982769?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0)
+- [x] [`Decode String (Medium)`](https://leetcode.com/problems/decode-string/)
 
 ### Sliding Window
 - [x] [**Sliding Window Maximum (Hard)**](https://leetcode.com/problems/sliding-window-maximum/)
@@ -58,11 +59,17 @@
 - [x] [**Median of 2 Sorted Arrays (Hard)**](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 - [x] [**K-th element of two sorted arrays (Hard)**](https://practice.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array1317/1)
 - [x] [`Find Peak Element (Medium)`](https://leetcode.com/problems/find-peak-element/)
+- [x] [**Ugly Number III (Hard)**](https://leetcode.com/problems/ugly-number-iii/)
 
 ### Heap
 - [ ] [Implement Heap](https://www.codingninjas.com/codestudio/problems/min-heap_4691801?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=2)
 - [x] [**Median From Data Stream (Hard)**](https://leetcode.com/problems/find-median-from-data-stream/)
 - [x] [`Merge K Sorted Lists (Medium)`](https://leetcode.com/problems/merge-k-sorted-lists/)
+- [x] [`Find K Pairs with Smallest Sums (Medium)`](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/)
+- [x] [`Kth Smallest Element in a Sorted Matrix`](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+- [x] [**Trapping Rain Water II (Hard)**](https://leetcode.com/problems/trapping-rain-water-ii/)
+- [x] [**Smallest Range Covering Elements from K Lists (Hard)**](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/)
+- [x] [`Reorganize String (Medium)`](https://leetcode.com/problems/reorganize-string/)
 
 ### Tree
 - [x] [Preorder Traversal (Iterative)](https://leetcode.com/problems/binary-tree-preorder-traversal/)
@@ -95,6 +102,10 @@
 - [x] [**Word Ladder (Hard GFG)**](https://practice.geeksforgeeks.org/problems/word-ladder-ii/1)
 - [x] [**Word Ladder (Hard Leetcode)**](https://leetcode.com/problems/word-ladder-ii/)
 - [ ] [`Clone Graph (Medium)`](https://leetcode.com/problems/clone-graph/)
+- [x] [`Eventual Safe States (Medium)`](https://leetcode.com/problems/find-eventual-safe-states/)
+- [x] [`Minimum Height Trees (Medium)`](https://leetcode.com/problems/minimum-height-trees/)
+- [ ] [**Reconstruct Itinerary (Hard)**](https://leetcode.com/problems/reconstruct-itinerary/)
+- [ ] [**Redundant Connection II (Hard)**](https://leetcode.com/problems/redundant-connection-ii/)
 
 ### Trie
 - [x] [Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
